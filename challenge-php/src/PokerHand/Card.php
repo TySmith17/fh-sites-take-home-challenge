@@ -8,7 +8,7 @@ class Card {
 
     public function __construct($card) {
       $this->suit = array_pop($card);
-      $this->value = join('',$card);
+      $this->value = intval(join('',$card));
     }
 
     public function getValue() {
