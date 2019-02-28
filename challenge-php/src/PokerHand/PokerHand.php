@@ -23,6 +23,16 @@ class PokerHand {
             return 'Royal Flush';
           }
           return 'Straight Flush';
+        } elseif ($this->isFlush()) {
+          return 'Four of a Kind';
+        } elseif ($this->fullHouse()) {
+          return 'Full House';
+        } elseif ($this->isFlush()) {
+          return 'Flush';
+        } elseif ($this->isStraight()) {
+          return 'Straight';
+        } elseif ($this->threeOfAKind()) {
+          return 'Three of a Kind';
         }
         return 'High Card';
     }
@@ -62,6 +72,27 @@ class PokerHand {
          return true;
        }
        return false;
+    }
+
+    private function fullHouse(){
+      if ($this->threeOfAKind() &&
+          $this->cards[0]->getValue() === $this->cards[1]->getValue() &&
+          $this->cards[3]->getValue() === $this->cards[4]->getValue()
+      ){
+        return true
+      }
+      return false
+    }
+
+    private function threeOfAKind() {
+      for ($i=0; $i < 3 ; $i++) {
+        if($this->cards[$i]->getValue() === ($this->cards[$i+1]->getValue()) &&
+           $this->cards[$i]->getValue() === ($this->cards[$i+2]->getValue())
+          ){
+          return true;
+        }
+      }
+      return flase;
     }
 
 
