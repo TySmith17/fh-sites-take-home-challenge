@@ -53,7 +53,7 @@ class PokerHand {
 
     private function isFlush() {
       $first_suit = $this->cards[0]->getSuit();
-      for($i=1; $i < 5 ; $i++) {
+      for($i=1; $i < sizeof($this->cards) ; $i++) {
         if($first_suit !== $this->cards[$i]->getSuit()){
           return false;
         }
@@ -62,7 +62,7 @@ class PokerHand {
     }
 
     private function isStraight() {
-      for ($i=0; $i < 4 ; $i++) {
+      for ($i=0; $i < sizeof($this->cards)-1 ; $i++) {
         if($this->cards[$i]->getValue() !== ($this->cards[$i+1]->getValue()+1) ){
           return false;
         }
@@ -90,7 +90,7 @@ class PokerHand {
     }
 
     private function threeOfAKind() {
-      for ($i=0; $i < 3 ; $i++) {
+      for ($i=0; $i < sizeof($this->cards)-2 ; $i++) {
         if($this->cards[$i]->getValue() === $this->cards[$i+2]->getValue()) {
           return true;
         }
