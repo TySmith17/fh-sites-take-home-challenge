@@ -23,7 +23,7 @@ class PokerHand {
             return 'Royal Flush';
           }
           return 'Straight Flush';
-        } elseif ($this->isFlush()) {
+        } elseif ($this->fourOfAKind()) {
           return 'Four of a Kind';
         } elseif ($this->fullHouse()) {
           return 'Full House';
@@ -36,7 +36,7 @@ class PokerHand {
         } elseif ($this->twoPair()) {
           return 'Two Pair';
         } elseif ($this->aPair()) {
-          return 'One Pair'
+          return 'One Pair';
         }
         return 'High Card';
     }
@@ -83,9 +83,9 @@ class PokerHand {
           $this->cards[0]->getValue() === $this->cards[1]->getValue() &&
           $this->cards[3]->getValue() === $this->cards[4]->getValue()
       ){
-        return true
+        return true;
       }
-      return false
+      return false;
     }
 
     private function threeOfAKind() {
@@ -94,13 +94,14 @@ class PokerHand {
           return true;
         }
       }
-      return flase;
+      return false;
     }
 
     private function aPair($i = 0){
       while ($i < sizeof($this->cards)-1 ) {
         if($this->cards[$i]->getValue() === $this->cards[$i+1]->getValue()) {
-          return $i;
+          //dont return a zero
+          return $i+1;
         }
         $i++;
       }
@@ -110,9 +111,8 @@ class PokerHand {
     private function twoPair() {
       $first_match = $this->aPair();
       if($first_match) {
-        return $this->aPair($first_match+1);
+        return $this->aPair($first_match);
       }
     }
-
 
 }
