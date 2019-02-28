@@ -38,6 +38,7 @@ class PokerHand {
         } elseif ($this->aPair()) {
           return 'One Pair';
         }
+        echo 'You should just fold';
         return 'High Card';
     }
 
