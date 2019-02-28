@@ -2,15 +2,13 @@
 
 namespace PokerHand;
 
-class Card
-{
-  protected $value;
-  protected $suit;
+class Card {
+  private $value;
+  private $suit;
 
-    public function __construct($card)
-    {
-      $this->value =  $card[0];
-      $this->suit = $card[1];
+    public function __construct($card) {
+      $this->suit = array_pop($card);
+      $this->value = join('',$card);
     }
 
     public function getValue() {
