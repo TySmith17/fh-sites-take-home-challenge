@@ -16,11 +16,21 @@ class PokerHand {
             $chars = preg_split('//',$card,-1,PREG_SPLIT_NO_EMPTY);
           );
       }
+      $this->sortCards();
     }
 
     public function getRank() {
         // TODO: Implement poker hand ranking
         return 'Royal Flush';
+    }
+
+    private sortCards() {
+      usort($this->cards,function($a,$b){
+        if ($a->getValue() === $b->getValue()){
+            return 0;
+        }
+        return ($a->getValue() < $b->getValue() ) ? -1 : 1;
+      });
     }
 
     private function isFlush() {
