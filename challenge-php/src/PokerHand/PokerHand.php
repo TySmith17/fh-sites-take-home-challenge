@@ -33,6 +33,10 @@ class PokerHand {
           return 'Straight';
         } elseif ($this->threeOfAKind()) {
           return 'Three of a Kind';
+        } elseif ($this->twoPair()) {
+          return 'Two Pair';
+        } elseif ($this->aPair()) {
+          return 'One Pair'
         }
         return 'High Card';
     }
@@ -86,13 +90,28 @@ class PokerHand {
 
     private function threeOfAKind() {
       for ($i=0; $i < 3 ; $i++) {
-        if($this->cards[$i]->getValue() === ($this->cards[$i+1]->getValue()) &&
-           $this->cards[$i]->getValue() === ($this->cards[$i+2]->getValue())
-          ){
+        if($this->cards[$i]->getValue() === $this->cards[$i+2]->getValue()) {
           return true;
         }
       }
       return flase;
+    }
+
+    private function aPair($i = 0){
+      while ($i < sizeof($this->cards)-1 ) {
+        if($this->cards[$i]->getValue() === $this->cards[$i+1]->getValue()) {
+          return $i;
+        }
+        $i++;
+      }
+      return false;
+    }
+
+    private function twoPair() {
+      $first_match = $this->aPair();
+      if($first_match) {
+        return $this->aPair($first_match+1);
+      }
     }
 
 
